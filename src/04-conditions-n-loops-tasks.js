@@ -144,16 +144,19 @@ function isTriangle(a, b, c) {
  *
  */
 function doRectanglesOverlap(rect1, rect2) {
-  const topDif = Math.abs(rect1.top - rect2.top);
-  const leftDif = Math.abs(rect1.left - rect2.left);
-  const heightMin = Math.min(rect1.height, rect2.height);
-  const widthMin = Math.min(rect1.width, rect2.width);
+  const minLeft = Math.min(rect1.left, rect2.left);
+  const rightSide = [rect1, rect2].find((elem) => elem.left === minLeft).width + minLeft;
+  const leftSide = Math.max(rect1.left, rect2.left);
 
-  if (topDif >= heightMin) {
+  const minTop = Math.min(rect1.top, rect2.top);
+  const bottomSide = [rect1, rect2].find((elem) => elem.top === minTop).height + minTop;
+  const topSide = Math.max(rect1.top, rect2.top);
+
+  if (rightSide <= leftSide) {
     return false;
   }
 
-  if (leftDif >= widthMin) {
+  if (bottomSide <= topSide) {
     return false;
   }
 
