@@ -191,12 +191,7 @@ function doRectanglesOverlap(rect1, rect2) {
  *
  */
 function isInsideCircle({ center: { x, y }, radius: r }, point) {
-  const xMin = x - r;
-  const xMax = x + r;
-  const yMin = y - r;
-  const yMax = y + r;
-
-  return (point.x > xMin && point.x < xMax) && (point.y > yMin && point.y < yMax);
+  return (x - point.x) ** 2 + (y - point.y) ** 2 < r ** 2;
 }
 
 
